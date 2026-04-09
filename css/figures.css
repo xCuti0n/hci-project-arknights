@@ -1,0 +1,356 @@
+/* Figures page styles */
+
+/* Cinematic layout styles */
+.cinematic {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 120px 1fr 280px; /* narrower side columns to bring UI inward */
+  gap: 0.6rem;
+  align-items: stretch; /* allow taller timeline */
+  padding: 1.6rem 1.6rem;
+  box-sizing: border-box;
+  min-height: 72vh; /* taller stage area */
+  position: relative; /* for overlay canvas */
+  /* absolute positioning helpers */
+  --timeline-left: calc(50% - 540px);
+  --preview-left: calc(50% + 340px);
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+}
+
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: auto 0; /* center timeline list vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 2.6rem; /* larger gap between nodes */
+}
+
+.timeline {
+  position: relative; /* for vertical line */
+}
+
+/* vertical line styles */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--line-x));
+  top: 6%;
+  bottom: 6%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 12, 16, 0.96),
+    rgba(10, 12, 16, 0.74)
+  );
+  border-radius: 6px;
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  z-index: 1;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--line-x) + 1px);
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.03)
+  );
+  border-radius: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.timeline .node {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  outline: none;
+  padding: 4px 0;
+  min-height: 36px; /* reserve node height */
+  position: relative;
+}
+
+.timeline .node .label {
+  font-weight: 600;
+  font-size: 0.93rem;
+  opacity: 0.92;
+  white-space: nowrap; /* keep labels on one line */
+  line-height: 1.1;
+  display: inline-block;
+  z-index: 4;
+}
+
+.timeline .node[aria-current="true"] .label,
+.timeline .node.active .label {
+  color: #fff;
+  font-size: 1.02rem;
+}
+
+/* dot styles for timeline nodes */
+.timeline .node .dot {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, #fff, #bbb 40%);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+  display: inline-block;
+  position: absolute;
+  left: calc(var(--line-x) - 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  z-index: 3;
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 220ms ease,
+    background 220ms;
+}
+.timeline .node.active .dot,
+.timeline .node[aria-current="true"] .dot {
+  transform: translateY(-50%) scale(1.6);
+  box-shadow:
+    0 8px 28px rgba(255, 255, 255, 0.14),
+    0 2px 6px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at 30% 30%, #fff, #e6e6e6 40%);
+}
+
+.timeline {
+  align-self: center;
+}
+.timeline {
+  height: 90vh;
+  max-height: 96vh;
+  overflow: visible;
+}
+
+/* align dots to the vertical line */
+.timeline {
+  --line-x: 28px;
+  position: absolute;
+  left: var(--timeline-left);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+}
+.timeline ul .node {
+  position: relative;
+  padding-left: calc(var(--line-x) + 18px);
+}
+.timeline::before {
+  left: calc(var(--line-x));
+}
+.timeline .node .dot {
+  /* position already set above; keep here to ensure alignment */
+  position: absolute;
+  left: calc(var(--line-x) - 10px);
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+}
+.timeline .node.active .dot,
+.timeline .node[aria-current="true"] .dot {
+  transform: translateY(-50%) scale(1.6);
+}
+.preview {
+  position: absolute;
+  left: var(--preview-left);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64vh; /* slightly taller center */
+  position: absolute; /* center the stage independently of the grid */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 440px); /* leave room for side panels */
+  max-width: 980px;
+  z-index: 1;
+}
+
+.stage-inner {
+  text-align: center;
+  color: #f6f6f6;
+}
+
+.stage .story-line {
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+}
+
+.act-title {
+  font-size: 2.6rem; /* tightened visual scale */
+  margin: 0.15rem 0;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.act-sub {
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.25rem;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-frame {
+  width: 380px; /* slightly larger to show more upper body */
+  height: 380px;
+  border: 5px solid rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(255, 255, 255, 0.03) inset;
+  background: rgba(0, 0, 0, 0.18);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%; /* focus more on upper body / face */
+  display: block;
+  transition:
+    transform 380ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 240ms ease;
+  will-change: transform, opacity;
+}
+
+/* Preview navigation controls */
+.preview-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  backdrop-filter: blur(4px);
+}
+.preview-prev {
+  left: 8px;
+}
+.preview-next {
+  right: 8px;
+}
+.preview-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.preview-controls {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 6;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+.preview-counter {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Preview caption (hidden by design) */
+.preview-caption {
+  display: none !important;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  text-align: center;
+}
+
+.diamond {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 6px 8px;
+  transform: rotate(45deg);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* small screens: stack */
+@media (max-width: 980px) {
+  .cinematic {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.8rem;
+    padding: 1.5rem;
+  }
+  .preview {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+  }
+  .stage {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+  .timeline {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+  .preview-frame {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cinematic {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 1.2rem;
+  }
+  .timeline {
+    order: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .stage {
+    order: 2;
+  }
+  .preview {
+    order: 3;
+  }
+  .preview-frame {
+    width: 92%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}

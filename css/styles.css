@@ -1,0 +1,1046 @@
+/* Start screen styles */
+.start-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.start-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start-logo {
+  max-width: 40vw;
+  max-height: 50vh;
+  object-fit: contain;
+  animation: logoFadeIn 1.5s ease forwards;
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Novocento webfont */
+@font-face {
+  font-family: "Novocento";
+  src:
+    url("../fonts/Novecentosanswide-Light.woff2") format("woff2"),
+    url("../fonts/Novecentosanswide-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Novocento";
+  src:
+    url("../fonts/Novecentosanswide-Normal.woff2") format("woff2"),
+    url("../fonts/Novecentosanswide-Normal.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Novocento";
+  src:
+    url("../fonts/Novecentosanswide-DemiBold.woff2") format("woff2"),
+    url("../fonts/Novecentosanswide-DemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+.start-logo.pop {
+  animation: logoPop 0.4s ease-in-out forwards;
+}
+
+@keyframes logoPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Reset and base styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #000;
+}
+
+body {
+  font-family:
+    "Novocento",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  line-height: 1.6;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: fadeIn 0.5s ease forwards;
+  overflow-x: hidden;
+}
+
+body.slide-out {
+  animation: fadeOut 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bg-image, url("../images/zone_1_1.png"));
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  filter: blur(5px);
+  transition: opacity 0.6s ease;
+  z-index: -2; /* sit behind the fade overlay */
+}
+
+/* Overlay pseudo-element used for crossfade */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--bg-fade-image, none);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: -1; /* above ::before so fading overlay shows */
+  pointer-events: none;
+}
+
+/* Fade overlay when active */
+body.bg-fade::after {
+  opacity: 1;
+}
+
+body.page-home::before {
+  background-image: var(--bg-image, url("../images/home.png"));
+}
+
+body.page-figures::before {
+  background-image: var(--bg-image, url("../images/product.png"));
+}
+
+body.page-aboutus::before {
+  background-image: var(--bg-image, url("../images/about%20us.png"));
+}
+
+body.page-contactus::before {
+  background-image: var(--bg-image, url("../images/contact.png"));
+}
+
+/* Header styles */
+header {
+  background: rgba(230, 230, 230, 0.9);
+  padding: 0.5rem 2rem;
+  animation: slideDown 0.5s ease forwards;
+}
+
+/* Layout for index header */
+body.page-main header .header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.page-main .header-question {
+  margin: 0;
+  color: #111;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+nav a {
+  color: #555;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #111;
+}
+
+/* Page content styles */
+.page-content {
+  background: rgba(230, 230, 230, 0.85);
+  border-radius: 8px;
+  padding: 3rem;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.page-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.page-content p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+/* Main content styles */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Ensure home page stacks the rectangles above the content */
+body.page-home main {
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Four vertical rectangles used on the home page */
+.rectangles {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+  min-height: 40vh;
+}
+
+.rect {
+  width: 8vw;
+  min-width: 64px;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms;
+}
+
+.rect:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.32);
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Nav card styles */
+.nav-cards {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0 2rem;
+}
+
+.nav-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 22vw;
+  height: 70vh;
+  margin-left: -2vw;
+  background: url("../images/banner.png") no-repeat center center / contain;
+  color: #fff;
+  font-family:
+    "Novocento",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border-radius: 0;
+  /* use CSS vars for JS transforms */
+  --tx: 0px;
+  --ty: 0px;
+  --rot: 0deg;
+  --nav-scale: 1;
+  --hover-ty: 0px;
+  transition:
+    transform 0.28s,
+    filter 0.3s,
+    opacity 0.5s ease;
+  transform: translate(calc(var(--tx)), calc(var(--ty) + var(--hover-ty)))
+    rotate(var(--rot)) scale(var(--nav-scale));
+  cursor: pointer;
+  overflow: visible;
+  padding-bottom: 2rem;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.28));
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 -8px 24px rgba(0, 0, 0, 0.12);
+  -webkit-mask-image: url("../images/banner.png");
+  mask-image: url("../images/banner.png");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  position: relative;
+}
+
+.nav-card.fade-out {
+  opacity: 0;
+  --nav-scale: 0.9;
+}
+
+/* Zoom overlay styles */
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  pointer-events: none;
+}
+
+.zoom-overlay .zoom-clone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("../images/banner.png") no-repeat center center / contain;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform: scale(1);
+}
+
+.zoom-overlay .zoom-clone.zoom-first {
+  transform: scale(1.15);
+}
+
+.zoom-overlay .zoom-clone.zoom-second {
+  transform: scale(2);
+  opacity: 0;
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.nav-card img {
+  width: 85%;
+  height: auto;
+  object-fit: contain;
+  padding: 0;
+}
+
+/* Main page particles and parallax */
+.main-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* behind nav cards */
+}
+.main-overlay canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ensure nav-cards appear above the overlay and are ready for parallax */
+.nav-cards {
+  position: relative; /* above overlay for parallax */
+  z-index: 2;
+  perspective: 1200px;
+}
+.nav-card {
+  will-change: transform;
+}
+
+.nav-card span {
+  flex-shrink: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-card:hover {
+  --nav-scale: 1.06;
+  --hover-ty: -10px;
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.38));
+}
+
+.nav-card::before { /* glossy rim and inner gradient */
+.nav-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(0, 0, 0, 0.08)
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 3;
+}
+.nav-card::after {
+  /* soft drop shadow under banner */
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  width: 82%;
+  height: 48px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.12) 50%,
+    transparent 80%
+  );
+  filter: blur(12px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+/* keep card content above shadow */
+.nav-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Footer styles */
+footer {
+  background: rgba(230, 230, 230, 0.9);
+  color: #333;
+  text-align: center;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cinematic home layout */
+.cinematic {
+  /* styles removed as they have been moved to figures.css */
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+}
+
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: auto 0; /* vertically center the list inside the timeline column */
+  display: flex;
+  flex-direction: column;
+  gap: 2.6rem; /* larger vertical spacing between nodes */
+}
+
+.timeline {
+  position: relative; /* for vertical line */
+}
+
+/* vertical line styles */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--line-x));
+  top: 6%;
+  bottom: 6%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 12, 16, 0.96),
+    rgba(10, 12, 16, 0.74)
+  );
+  border-radius: 6px;
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  z-index: 1;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.45));
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--line-x) + 1px);
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.03)
+  );
+  border-radius: 2px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.timeline .node {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  outline: none;
+  padding: 4px 0;
+  min-height: 36px; /* ensure each node reserves vertical space */
+  position: relative;
+}
+
+.timeline .node .dot {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, #fff, #bbb 40%);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+  display: inline-block;
+  position: absolute;
+  left: calc(var(--line-x) - 10px); /* center the 20px dot on the line */
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  z-index: 3; /* sit above the vertical line */
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 220ms ease,
+    background 220ms;
+}
+
+.timeline .node .label {
+  font-weight: 600;
+  font-size: 0.93rem;
+  opacity: 0.92;
+  white-space: nowrap; /* keep labels on one line to avoid stacking */
+  line-height: 1.1;
+  display: inline-block;
+  z-index: 4;
+}
+
+.timeline .node[aria-current="true"] .label,
+.timeline .node.active .label {
+  color: #fff;
+  font-size: 1.02rem;
+}
+
+/* selected dot grows */
+.timeline .node .dot {
+  transform: translateY(-50%) scale(1);
+}
+.timeline .node .dot {
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, #fff, #bbb 40%);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.06);
+  display: inline-block;
+  position: absolute;
+  left: calc(var(--line-x) - 10px); /* center the 20px dot on the line */
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  z-index: 3; /* sit above the vertical line */
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 220ms ease,
+    background 220ms;
+}
+
+.timeline .node.active .dot,
+.timeline .node[aria-current="true"] .dot {
+  transform: translateY(-50%) scale(1.6);
+  box-shadow:
+    0 8px 28px rgba(255, 255, 255, 0.14),
+    0 2px 6px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at 30% 30%, #fff, #e6e6e6 40%);
+}
+  align-self: center;
+}
+.timeline {
+  height: 90vh;
+  max-height: 96vh;
+  overflow: visible;
+}
+
+/* align dots to the vertical line */
+.timeline {
+  --line-x: 28px;
+  position: absolute;
+  left: var(--timeline-left);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+}
+.timeline ul .node {
+  position: relative;
+  padding-left: calc(var(--line-x) + 18px);
+}
+.timeline::before {
+  left: calc(var(--line-x));
+}
+.timeline .node .dot {
+  position: absolute;
+  left: calc(var(--line-x) - 10px); /* center the 20px dot on the line */
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+}
+.timeline .node.active .dot,
+.timeline .node[aria-current="true"] .dot {
+  transform: translateY(-50%) scale(1.6);
+}
+.preview {
+  position: absolute;
+  left: var(--preview-left);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64vh; /* slightly taller center */
+  position: absolute; /* center the stage independently of the grid */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 440px); /* leave room for side panels */
+  max-width: 980px;
+  z-index: 1;
+}
+
+.stage-inner {
+  text-align: center;
+  color: #f6f6f6;
+}
+
+.stage .story-line {
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+}
+
+.act-title {
+  font-size: 2.6rem; /* tightened visual scale */
+  margin: 0.15rem 0;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.act-sub {
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.25rem;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-frame {
+  width: 380px; /* slightly larger to show more upper body */
+  height: 380px;
+  border: 5px solid rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(255, 255, 255, 0.03) inset;
+  background: rgba(0, 0, 0, 0.18);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%; /* focus more on upper body / face */
+  display: block;
+  transition:
+    transform 380ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 240ms ease;
+  will-change: transform, opacity;
+}
+
+/* Preview navigation controls */
+.preview-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  backdrop-filter: blur(4px);
+}
+.preview-prev {
+  left: 8px;
+}
+.preview-next {
+  right: 8px;
+}
+.preview-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.preview-controls {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 6;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+.preview-counter {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Preview caption (hidden by design) */
+.preview-caption {
+  display: none !important;
+  padding: 0.6rem 0.8rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6));
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  text-align: center;
+}
+
+.diamond {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 6px 8px;
+  transform: rotate(45deg);
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+/* preview-caption is hidden */
+
+/* small screens: stack */
+@media (max-width: 980px) {
+  .cinematic {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.8rem;
+    padding: 1.5rem;
+  }
+  .preview {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+  }
+  .stage {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+  .timeline {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+  .preview-frame {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 560px) {
+  .cinematic {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 1.2rem;
+  }
+  .timeline {
+    order: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .stage {
+    order: 2;
+  }
+  .preview {
+    order: 3;
+  }
+  .preview-frame {
+    width: 92%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Overlay styles for particles and scanlines */
+.cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.cinematic-overlay canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.cinematic-overlay .scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.06;
+}
+
+/* Slight highlight glow layer behind center */
+.stage::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 40%;
+  left: 20%;
+  top: 28%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.02),
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* About page three-column pillar layout */
+.about-layout {
+  display: grid;
+  /* fixed side columns and responsive center; center the whole grid */
+  grid-template-columns: 260px minmax(520px, 760px) 260px;
+    /* styles removed as they have been moved to about.css */
+  /* allow the layout to flex inside main and size correctly */
+  flex: 1 1 auto;
+  min-height: 0;
+    /* styles removed as they have been moved to about.css */
+body.page-aboutus main {
+  /* Ensure main flexes to fill remaining space between header and footer */
+  display: flex;
+    /* styles removed as they have been moved to about.css */
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+    /* styles removed as they have been moved to about.css */
+  /* keep the center pillar visually tall but constrained to viewport */
+  min-height: 80vh;
+    /* styles removed as they have been moved to about.css */
+}
+.about-side .placeholder {
+  /* make side placeholders match the center pillar height and sit flush to edges */
+  width: 100%;
+  height: auto;
+  min-height: 80vh;
+    /* styles removed as they have been moved to about.css */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  /* clearer outer drop shadow for cinematic depth */
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.65),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+  /* hide any inner placeholder text visually while keeping semantics */
+  text-indent: -9999px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Use pillar images for the left and right placeholders */
+.about-side.left .placeholder {
+  background-image: url("../images/pillar1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* raise the image so it sits higher within the placeholder */
+  background-position: center 35%;
+}
+
+.about-side.right .placeholder {
+  background-image: url("../images/pillar2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* raise the image so it sits higher within the placeholder */
+  background-position: center 35%;
+}
+
+/* responsive: stack on smaller screens */
+@media (max-width: 980px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    /* allow the stacked layout to grow to full viewport height on small screens */
+    min-height: 100vh;
+  }
+  .about-side .placeholder {
+    height: 260px;
+  }
+}
+
+/* Lightbox modal for preview images */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.lightbox-overlay.open {
+  opacity: 1;
+}
+.lightbox-img {
+  max-width: 92%;
+  max-height: 92%;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.7);
+  border-radius: 6px;
+  transform: scale(0.98);
+  transition: transform 280ms ease;
+}
+.lightbox-overlay.open .lightbox-img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}

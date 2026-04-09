@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Figures - HCI Project</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/figures.css" />
+  </head>
+  <body class="page-figures">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="home.html">HOME</a></li>
+          <li><a href="figures.html" class="active">FIGURES</a></li>
+          <li><a href="aboutus.html">ABOUT US</a></li>
+          <li><a href="contactus.html">CONTACT US</a></li>
+          <li><a href="codeoverview.html">CODE OVERVIEW</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Cinematic timeline layout -->
+      <div class="cinematic">
+        <aside class="timeline" role="navigation" aria-label="Story timeline">
+          <ul>
+            <li class="node" data-index="0" tabindex="0" aria-current="true">
+              <span class="dot"></span>
+              <span class="label">Lappland</span>
+            </li>
+            <li class="node" data-index="1" tabindex="0">
+              <span class="dot"></span>
+              <span class="label">Texas</span>
+            </li>
+            <li class="node" data-index="2" tabindex="0">
+              <span class="dot"></span>
+              <span class="label">Ch'en</span>
+            </li>
+            <li class="node" data-index="3" tabindex="0">
+              <span class="dot"></span>
+              <span class="label">Amiya</span>
+            </li>
+          </ul>
+        </aside>
+
+        <section class="stage" aria-live="polite">
+          <div class="stage-inner">
+            <div class="story-line">· OPERATOR ·</div>
+            <h1 class="act-title">Act III</h1>
+            <p class="act-sub">NEXUS POINT OF FUTURE</p>
+          </div>
+        </section>
+
+        <aside class="preview" aria-label="Preview">
+          <div class="preview-frame">
+            <button
+              type="button"
+              class="preview-btn preview-prev"
+              aria-label="Previous"
+            >
+              ◀
+            </button>
+            <img
+              src="images/banner.png"
+              alt="Preview artwork"
+              class="preview-art"
+            />
+            <button
+              type="button"
+              class="preview-btn preview-next"
+              aria-label="Next"
+            >
+              ▶
+            </button>
+            <div class="preview-controls">
+              <div class="preview-counter">1 / 1</div>
+            </div>
+            <div class="diamond">◈</div>
+            <div class="preview-caption">Dissociative Recombination</div>
+          </div>
+        </aside>
+        <!-- Visual overlays particles and scanlines -->
+        <div class="cinematic-overlay" aria-hidden="true">
+          <canvas id="particles"></canvas>
+          <div class="scanlines"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 HCI Project</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

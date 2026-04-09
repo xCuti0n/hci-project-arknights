@@ -1,0 +1,70 @@
+/* About page styles */
+
+/* About page three-column layout */
+.about-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(520px, 760px) 260px; /* left / center / right */
+  gap: 1rem;
+  align-items: start;
+  justify-content: center; /* center the three-pillars group */
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.2rem;
+  box-sizing: border-box;
+}
+
+.about-pillar.page-content {
+  max-width: 760px;
+  width: 100%;
+  min-height: 80vh;
+  padding: 2rem;
+  background: linear-gradient(180deg, rgb(255, 255, 255), rgba(0, 0, 0, 0.02));
+  color: #1f2937; /* darker slate tone to better accent the background image */
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Ensure headings and important text read darker for emphasis */
+.about-pillar.page-content .act-title,
+.about-pillar.page-content h1,
+.about-pillar.page-content h2 {
+  color: #0b1220; /* near-black heading color */
+}
+
+.about-pillar.page-content p,
+.about-pillar.page-content .about-text {
+  color: #2b3440; /* slightly lighter than headings for readable body text */
+}
+
+.about-side .placeholder {
+  width: 100%;
+  height: 320px;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 35%; /* raise images slightly */
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.65);
+  text-indent: -9999px; /* hide placeholder text visually */
+  border-radius: 6px;
+}
+
+.about-side.left .placeholder {
+  background-image: url("../images/pillar1.png");
+}
+.about-side.right .placeholder {
+  background-image: url("../images/pillar2.png");
+}
+
+/* Remove faint outline, use drop shadow */
+.about-side .placeholder {
+  border: none;
+}
+
+@media (max-width: 980px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .about-side .placeholder {
+    height: 260px;
+  }
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Overview - HCI Project</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="page-codeoverview">
+    <header>
+      <nav>
+        <ul>
+          <li><a href="home.html">HOME</a></li>
+          <li><a href="figures.html">FIGURES</a></li>
+          <li><a href="aboutus.html">ABOUT US</a></li>
+          <li><a href="contactus.html">CONTACT US</a></li>
+          <li><a href="codeoverview.html" class="active">CODE OVERVIEW</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-content">
+        <h2>Code Overview</h2>
+        <p>
+          This is a quick overview of the coding and design choices I made for
+          this project.
+        </p>
+
+        <article>
+          <h3>Home (<code>home.html</code>)</h3>
+          <p>
+            The home page was inspired by a character selection menu acting as a
+            navigation hub. I added interactive sounds and subtle animations
+            like the hover effect and floating particles.
+          </p>
+        </article>
+
+        <article>
+          <h3>Figures (<code>figures.html</code>)</h3>
+          <p>
+            This one is the figures page, a three part cinematic layout. The
+            left is a timeline, the center shows the name, and the right is a
+            preview of the figure artwork. This page also includes interactive
+            bits and animations.
+          </p>
+        </article>
+
+        <article>
+          <h3>About (<code>aboutus.html</code>)</h3>
+          <p>
+            The About page uses a centered three pillar layout with two image
+            pillars on the sides and the main content in the middle.
+          </p>
+        </article>
+
+        <article>
+          <h3>Contact (<code>contactus.html</code>)</h3>
+          <p>
+            Contact is simple and includes a simple sentence with an email
+            address and the same particle background as the figures page for
+            consistency.
+          </p>
+        </article>
+
+        <article>
+          <h3>Shared styles & scripts</h3>
+          <p>
+            I tried to keep global stuff in <code>css/styles.css</code>.
+            Per-page files override specific pieces. All interactive behavior is
+            in <code>js/main.js</code>.
+          </p>
+        </article>
+
+        <article>
+          <h3>Quick design notes</h3>
+          <ul>
+            <li>
+              I split page CSS so the main stylesheet stays tidy, easier to
+              maintain.
+            </li>
+            <li>
+              Background audio may not autoplay on some browsers and requires
+              user interaction to start playback (Thats why I added a start
+              screen for the user to click in the main home page).
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 HCI Project</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
